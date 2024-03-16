@@ -21,6 +21,7 @@ if (!cached) {
 }
 
 export const connectToDatabase = async () => {
+    // this this the optimazation we are making
     if (cached.conn) {
         return cached.conn;
     }
