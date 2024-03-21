@@ -91,7 +91,6 @@ const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
               </Link>
             </Button>
 
-            <DeleteConfirmation imageId={image._id} />
           </div>
         )}
       </section>
