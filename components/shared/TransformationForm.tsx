@@ -157,8 +157,9 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
                 }
             }))
 
-            return onChangeField(value);
-        }, 1000);
+        }, 1000)();
+
+        return onChangeField(value);
     }
 
     // TODO: Return to updateCredits
