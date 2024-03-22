@@ -91,7 +91,7 @@ export const Collection = ({
         </Pagination>
       )}
     </>
-  );ß
+  );
 };
 
 const Card = ({ image }: any) => {
