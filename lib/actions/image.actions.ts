@@ -70,7 +70,7 @@ export async function updateImage({image, userId, path} : UpdateImageParams) {
 export async function deleteImage(imageId: string) {
     try {
         await connectToDatabase();
-    
+        await Image.findByIdAndDelete(imageId);
     } catch (error) {
         handleError(error);
     } finally {
@@ -115,15 +115,13 @@ export async function getAllImages({ limit = 9, page = 1, searchQuery = '' }: {
         secure: true,
       })
   
-      let expression = 'folder=imaginify';
+      let expression = 'folder=picfix';
   
       if (searchQuery) {
         expression += ` AND ${searchQuery}`
       }
   
-      const { resources } = await cloudinary.search
-        .expression(expression)
-        .execute();
+      const { resources } = await cloudinary.search.expression(expression).execute();
   
       const resourceIds = resources.map((resource: any) => resource.public_id);
   
@@ -136,7 +134,8 @@ export async function getAllImages({ limit = 9, page = 1, searchQuery = '' }: {
           }
         }
       }
-  
+      
+      // The number of page we want to skip . eg:supposed  we are on the 2nd page
       const skipAmount = (Number(page) -1) * limit;
   
       const images = await populateUser(Image.find(query))
